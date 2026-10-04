@@ -3,9 +3,9 @@
   "version": 2,
   "arguments": {
     "name": "Sorani 青空次元",
-    "description": "Experimental / Tier 3。兼容 Animeko 6.2.0 的选源列表检索；JSON API 搜索，SSR 详情页列集，WebView 捕获动态签名 HLS。",
+    "description": "青空次元在线资源。JSON API 搜索，SSR 详情页列集，WebView 捕获动态签名 HLS。",
     "iconUrl": "https://www.sorani.net/favicon.ico",
-    "tier": 3,
+    "tier": 0,
     "channelTiers": {},
     "searchConfig": {
       "searchUrl": "https://api.sorani.cc/sorani-cms/api/video?page=1&size=50&keyword={keyword}&enabled=true&sortMode=latest&sortDesc=false",

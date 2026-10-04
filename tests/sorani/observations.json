@@ -1,13 +1,15 @@
 {
   "verifiedOn": "2026-10-04",
   "animekoVersion": "6.2.0",
-  "status": "experimental",
-  "actualAppAcceptance": "partial-user-reported-playback",
+  "status": "stable",
+  "tier": 0,
+  "actualAppAcceptance": "user-confirmed-source-usable",
+  "stableAndTier0RequestedByUser": true,
   "userPlaybackReport": {
     "soraniPlayableInApp": true,
     "emptyChannelButtonObserved": true,
-    "updatedChannelLabelAccepted": false,
-    "audioSeekAndNextEpisodeAcceptance": "pending-user-manual-validation"
+    "updatedChannelLabelAcceptance": "not-separately-recorded",
+    "audioSeekAndNextEpisodeAcceptance": "not-separately-recorded"
   },
   "autoMatchEnabledInRepository": true,
   "localSubscriptionReadOnlyCheck": {
@@ -43,8 +45,8 @@
       { "episode": 1, "count": 1, "url": "https://www.sorani.net/anime/mal/4645/episode/01" },
       { "episode": 12, "count": 1, "url": "https://www.sorani.net/anime/mal/4645/episode/12" }
     ],
-    "actualAppAcceptance": "pending-user-manual-validation",
-    "playbackTested": false,
+    "actualAppAcceptance": "source-usable-confirmed-by-user-after-search-diagnostics",
+    "componentPlaybackTested": false,
     "sessionSnapshotBoundary": "6.2.0 fixes source configuration at session creation; updating subscriptions does not recreate the same playback query"
   },
   "channelLabelRegression": {
@@ -65,7 +67,7 @@
     "mediaIdChange": "only-channel-part-changes-from-null-to-site-label",
     "videoRulesAndHeadersUnchanged": true,
     "cacheBoundary": "old unexpired episode caches retain empty channel; manual query refresh clears current subject caches",
-    "updatedAppUiAcceptance": "pending-user-manual-validation"
+    "updatedAppUiAcceptance": "not-separately-recorded"
   },
   "cef": {
     "mode": "isolated-installed-component-with-external-JBR",
