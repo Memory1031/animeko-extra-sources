@@ -2,11 +2,11 @@
 
 验证日期：2026-10-04。环境：Windows 11 / Animeko 6.2.0。
 
-当前状态 **Experimental**。用户负责完整应用内验收；本次未在正在运行的 Ani 中添加订阅或操作播放器。
+当前状态 **Experimental**。用户负责完整应用内验收；本次没有自动操作 Ani 播放器。只读检查确认用户已添加开发订阅、刷新出 1 个源，Sorani 实例已启用。
 
 ## 已执行的验证
 
-这组测试在建立仓库前执行。第一版曾启用自动匹配以检查分集过滤；本仓库按手动查找目标关闭 `autoMatch.enabled`，其余搜索、集号、播放匹配规则沿用已验证结果。
+这组测试在建立仓库前执行。最初启用自动匹配检查分集过滤，随后曾为手动查找关闭 `autoMatch.enabled`。但进一步检查确认：6.2.0 缺少新分支的独立手动查找界面，关闭开关会让 `SelectorMediaSource.fetch` 返回空结果，选源列表会隐藏查询成功但零结果的源。现已恢复 `autoMatch.enabled=true` 以兼容 6.2.0，保持 Tier 3，不提升发布状态。
 
 - 读取 Animeko v6.2.0 的 Selector、订阅、配置编解码代码，核对最新分支相关 schema。使用安装包实际 `MediaSourceCodecManager` 解码单源、剪贴板及订阅包装。
 - `SelectorMediaSourceEngine` 处理真实搜索响应，验证 JSONPath 数字 id 与带尾斜杠的 rawBaseUrl 拼接。
@@ -50,23 +50,26 @@ API 存在 `alias` 字段。画完的别名包含“描绘直至生命尽头”�
 | 第 2 集在默认 8 秒窗口内超时 | WebView 资源加载 / 超时设置 | 已有 30 秒选项下四页通过；配置不能控制此全局设置 |
 | 无 Referer 的 m3u8 返回 403 | Header 防盗链 | 增加 `Referer: https://www.sorani.net/` 后 200、解码通过 |
 | 学生会的多个查询均无记录 | Sorani 搜索 API | 无可用条目，后续未测试；没有据此判定播放失败 |
+| 订阅有 1 个源且实例启用，但选源列表没有 Sorani | 6.2.0 的检索开关 / 空结果隐藏 | 恢复 `autoMatch.enabled=true`；6.2.0 没有独立手动浏览 UI |
 
 配置中的 UA 已通过请求测试；普通 curl UA 加 Referer 同样成功。Cookie 为空，本次无需登录或其他额外 headers。没有发现 JSONPath、URL 拼接、SSR 列集、集号解析或签名捕获方面的 schema 阻断。
 
 ## 用户手动验收
 
-从 [开发订阅](https://raw.githubusercontent.com/Memory1031/animeko-extra-sources/main/subscriptions/dev.json) 添加订阅，保留已有 css1、bt1 等订阅。刷新后确认 Sorani 为 Tier 3、自动匹配关闭。
+从 [开发订阅](https://raw.githubusercontent.com/Memory1031/animeko-extra-sources/main/subscriptions/dev.json) 添加或刷新订阅，保留已有 css1、bt1 等订阅。刷新后确认 Sorani 为 Tier 3、自动匹配开启，以参与 6.2.0 的选源列表检索。
 
 建议使用已有设置把视频链接解析超时改为 30 秒；该项位于资源偏好 / 高级设置，6.2.0 在偏好在线资源时显示。
 
 - [ ] 订阅刷新成功，显示 Sorani 青空次元。
-- [ ] 手动查找选择 Sorani，搜索“画完这个再去死”，选 id 4666。
-- [ ] 列出全部 12 集，选第 1 集，观察画面并听验声音。
+- [ ] 打开“画完这个再去死”的第 1 集，在“选择数据源”列表找到 Sorani 线路。
+- [ ] 选择 Sorani，确认对应 id 4666 / 第 1 集，观察画面并听验声音。
 - [ ] 拖动到中途，确认恢复播放及音画同步。
 - [ ] 切到第 2 集，确认仍走 Sorani 的同一条线路。
-- [ ] 搜索“药屋少女的呢喃”，选择第一季 4250，列出全部 24 集。
+- [ ] 打开“药屋少女的呢喃”第一季，确认 Sorani 匹配第一季 4250，而非其他季。
 - [ ] 药屋第 1 集、拖动、第 2 集和声音验收通过。
 - [ ] 核对所需的字幕组 / 翻译版本；本次未核对每部作品的字幕组。
-- [ ] 如需自动匹配，另行启用后测试不同季及 Bangumi 名称，不提前提高优先级。
+- [ ] 测试不同季及 Bangumi 名称的匹配，不提前提高优先级；对零结果作品，选源列表不显示 Sorani 属于 UI 行为。
+
+6.2.0 的源码依据：[`SelectorMediaSource.fetch`](https://github.com/open-ani/animeko/blob/v6.2.0/app/shared/app-data/src/commonMain/kotlin/domain/mediasource/web/SelectorMediaSource.kt) 的开关判断，以及 [`MediaSelectorState.createWebSourceFlow`](https://github.com/open-ani/animeko/blob/v6.2.0/app/shared/ui-mediaselect/src/commonMain/kotlin/ui/mediafetch/MediaSelectorState.kt) 的空结果隐藏规则。
 
 记录 App 版本、日期、作品/季/集数、错误层和必要的脱敏日志后，再决定是否将 catalog 状态改为 Stable。CI 只做离线配置与构建检查，不代表站点实时播放通过。

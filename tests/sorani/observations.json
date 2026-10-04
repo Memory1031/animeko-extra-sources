@@ -3,7 +3,14 @@
   "animekoVersion": "6.2.0",
   "status": "experimental",
   "actualAppAcceptance": "pending-user-manual-validation",
-  "autoMatchEnabledInRepository": false,
+  "autoMatchEnabledInRepository": true,
+  "localSubscriptionReadOnlyCheck": {
+    "devSubscriptionPresent": true,
+    "updatedSourceCount": 1,
+    "soraniInstanceEnabled": true,
+    "previousAutoMatchEnabled": false,
+    "diagnosis": "Animeko 6.2.0 has no standalone manual browse UI; disabled autoMatch returns empty results hidden by the selector"
+  },
   "search": [
     { "keyword": "画完这个再去死", "records": [{ "id": 4666, "title": "画完这个再去死" }] },
     { "keyword": "これ描いて死ね", "records": [] },
