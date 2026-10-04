@@ -1,0 +1,58 @@
+{
+  "verifiedOn": "2026-10-04",
+  "animekoVersion": "6.2.0",
+  "status": "experimental",
+  "actualAppAcceptance": "pending-user-manual-validation",
+  "autoMatchEnabledInRepository": false,
+  "search": [
+    { "keyword": "画完这个再去死", "records": [{ "id": 4666, "title": "画完这个再去死" }] },
+    { "keyword": "これ描いて死ね", "records": [] },
+    { "keyword": "药屋少女的呢喃", "records": [
+      { "id": 68, "title": "药屋少女的呢喃 第二季" },
+      { "id": 4250, "title": "药屋少女的呢喃" },
+      { "id": 4735, "title": "药屋少女的呢喃 第三季" }
+    ] },
+    { "keyword": "学生会也有洞！", "records": [] },
+    { "keyword": "学生会也有洞", "records": [] },
+    { "keyword": "生徒会にも穴はある", "records": [] }
+  ],
+  "details": [
+    { "id": 4666, "ssrEpisodeCount": 12, "allEpisodeSortsPassed": true },
+    { "id": 4250, "ssrEpisodeCount": 24, "allEpisodeSortsPassed": true }
+  ],
+  "cef": {
+    "mode": "isolated-installed-component-with-external-JBR",
+    "timeoutSeconds": 30,
+    "captured": [
+      "https://www.sorani.net/anime/mal/4666/episode/01",
+      "https://www.sorani.net/anime/mal/4666/episode/02",
+      "https://www.sorani.net/anime/mal/4250/episode/01",
+      "https://www.sorani.net/anime/mal/4250/episode/02"
+    ],
+    "videoHost": "www.sorani-vids.xyz",
+    "iframeObserved": false,
+    "dynamicSignatureObserved": true,
+    "exactTokenLifetime": "unknown"
+  },
+  "headers": {
+    "referer": "https://www.sorani.net/",
+    "statusWithoutReferer": 403,
+    "statusWithReferer": 200,
+    "customUserAgentRequired": "not-demonstrated",
+    "cookieRequiredInTests": false
+  },
+  "decoder": {
+    "tool": "FFmpeg distributed with Ani",
+    "secondsPerCheck": 3,
+    "video": "H.264 1920x1080",
+    "audio": "AAC stereo",
+    "checks": [
+      { "id": 4666, "episode": 1, "seekSeconds": 0, "exitCode": 0 },
+      { "id": 4666, "episode": 1, "seekSeconds": 600, "exitCode": 0 },
+      { "id": 4666, "episode": 2, "seekSeconds": 0, "exitCode": 0 },
+      { "id": 4250, "episode": 1, "seekSeconds": 0, "exitCode": 0 },
+      { "id": 4250, "episode": 2, "seekSeconds": 0, "exitCode": 0 }
+    ],
+    "speakerOutputVerified": false
+  }
+}

@@ -1,5 +1,60 @@
 {
   "exportedMediaSourceDataList": {
-    "mediaSources": []
+    "mediaSources": [
+      {
+        "factoryId": "web-selector",
+        "version": 2,
+        "arguments": {
+          "name": "Sorani 青空次元",
+          "description": "Experimental / Tier 3 手动查找源。JSON API 搜索，SSR 详情页列集，WebView 捕获动态签名 HLS；应用内验收待完成。",
+          "iconUrl": "https://www.sorani.net/favicon.ico",
+          "tier": 3,
+          "channelTiers": {},
+          "searchConfig": {
+            "searchUrl": "https://api.sorani.cc/sorani-cms/api/video?page=1&size=50&keyword={keyword}&enabled=true&sortMode=latest&sortDesc=false",
+            "rawBaseUrl": "https://www.sorani.net/anime/mal/",
+            "requestInterval": 3000,
+            "subjectFormatId": "json-path-indexed",
+            "selectorSubjectFormatJsonPathIndexed": {
+              "selectNames": "$.data.records[*].title",
+              "selectLinks": "$.data.records[*].id",
+              "preferShorterName": true
+            },
+            "channelFormatId": "no-channel",
+            "selectorChannelFormatNoChannel": {
+              "selectEpisodes": ".episode-thumb-grid > a[href^='/anime/mal/'][href*='/episode/']",
+              "selectEpisodeLinks": "",
+              "matchEpisodeSortFromName": "^第\\s*0*(?<ep>\\d+(?:\\.\\d+)?)\\s*[话集]$"
+            },
+            "defaultResolution": "1080P",
+            "defaultSubtitleLanguage": "CHS",
+            "autoMatch": {
+              "enabled": false,
+              "searchUseOnlyFirstWord": false,
+              "searchRemoveSpecial": false,
+              "searchUseSubjectNamesCount": 2,
+              "preferShorterName": true,
+              "filterBySubjectName": true,
+              "filterByEpisodeSort": true
+            },
+            "searchUseOnlyFirstWord": false,
+            "searchRemoveSpecial": false,
+            "searchUseSubjectNamesCount": 2,
+            "filterBySubjectName": true,
+            "filterByEpisodeSort": true,
+            "matchVideo": {
+              "enableNestedUrl": true,
+              "matchNestedUrl": "$^",
+              "matchVideoUrl": "^(?<v>https?://[^\\s\"']+\\.(?:m3u8|mp4)(?:\\?[^\\s\"']*)?)$",
+              "cookies": "",
+              "addHeadersToVideo": {
+                "referer": "https://www.sorani.net/",
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+              }
+            }
+          }
+        }
+      }
+    ]
   }
 }

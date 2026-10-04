@@ -1,4 +1,8 @@
 {
-  "sources": []
+  "sources": [
+    {
+      "path": "web/sorani.json",
+      "status": "experimental"
+    }
+  ]
 }
-

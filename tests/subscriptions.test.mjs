@@ -11,9 +11,18 @@ const source = (name, tier = 3) => ({
 });
 const sourceList = text => JSON.parse(text).exportedMediaSourceDataList.mediaSources;
 
+async function cleanFixture(root) {
+  const resolved = path.resolve(root);
+  if (path.dirname(resolved) !== path.resolve(tmpdir()) ||
+      !path.basename(resolved).startsWith('animeko-extra-sources-')) {
+    throw new Error(`Refusing to remove unexpected test directory: ${resolved}`);
+  }
+  await rm(resolved, { recursive: true, force: true });
+}
+
 async function fixture(t, entries, files) {
   const root = await mkdtemp(path.join(tmpdir(), 'animeko-extra-sources-'));
-  t.after(() => rm(root, { recursive: true, force: true }));
+  t.after(() => cleanFixture(root));
   await mkdir(path.join(root, 'sources/web/nested'), { recursive: true });
   await writeFile(path.join(root, 'sources/catalog.json'), JSON.stringify({ sources: entries }));
   for (const [file, value] of Object.entries(files)) {
@@ -77,7 +86,7 @@ test('duplicate names are rejected to preserve subscription update identity', as
 
 test('--check fails on stale artifacts without overwriting them', async t => {
   const root = await mkdtemp(path.join(tmpdir(), 'animeko-extra-sources-cli-'));
-  t.after(() => rm(root, { recursive: true, force: true }));
+  t.after(() => cleanFixture(root));
   await mkdir(path.join(root, 'scripts'), { recursive: true });
   await mkdir(path.join(root, 'sources/web'), { recursive: true });
   await mkdir(path.join(root, 'subscriptions'), { recursive: true });
@@ -94,4 +103,3 @@ test('--check fails on stale artifacts without overwriting them', async t => {
   assert.equal(run(['--check']).status, 1);
   assert.equal(await readFile(path.join(root, 'subscriptions/dev.json'), 'utf8'), 'stale\n');
 });
-
