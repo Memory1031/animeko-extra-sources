@@ -1,0 +1,21 @@
+name: Validate subscriptions
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test
+      - run: node scripts/validate.mjs
+      - run: node scripts/build-subscriptions.mjs --check
+
