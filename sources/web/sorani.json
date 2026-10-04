@@ -17,10 +17,13 @@
         "selectLinks": "$.data.records[*].id",
         "preferShorterName": true
       },
-      "channelFormatId": "no-channel",
-      "selectorChannelFormatNoChannel": {
-        "selectEpisodes": ".episode-thumb-grid > a[href^='/anime/mal/'][href*='/episode/']",
-        "selectEpisodeLinks": "",
+      "channelFormatId": "index-grouped",
+      "selectorChannelFormatFlattened": {
+        "selectChannelNames": "title",
+        "matchChannelName": "(?<ch>青空次元)",
+        "selectEpisodeLists": ".episode-scroll-panel--detail",
+        "selectEpisodesFromList": ".episode-thumb-grid > a[href^='/anime/mal/'][href*='/episode/']",
+        "selectEpisodeLinksFromList": "",
         "matchEpisodeSortFromName": "^第\\s*0*(?<ep>\\d+(?:\\.\\d+)?)\\s*[话集]$"
       },
       "defaultResolution": "1080P",

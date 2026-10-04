@@ -2,7 +2,13 @@
   "verifiedOn": "2026-10-04",
   "animekoVersion": "6.2.0",
   "status": "experimental",
-  "actualAppAcceptance": "pending-user-manual-validation",
+  "actualAppAcceptance": "partial-user-reported-playback",
+  "userPlaybackReport": {
+    "soraniPlayableInApp": true,
+    "emptyChannelButtonObserved": true,
+    "updatedChannelLabelAccepted": false,
+    "audioSeekAndNextEpisodeAcceptance": "pending-user-manual-validation"
+  },
   "autoMatchEnabledInRepository": true,
   "localSubscriptionReadOnlyCheck": {
     "devSubscriptionPresent": true,
@@ -40,6 +46,26 @@
     "actualAppAcceptance": "pending-user-manual-validation",
     "playbackTested": false,
     "sessionSnapshotBoundary": "6.2.0 fixes source configuration at session creation; updating subscriptions does not recreate the same playback query"
+  },
+  "channelLabelRegression": {
+    "mode": "isolated-installed-Animeko-6.2.0-codec-and-Selector-engine",
+    "previousChannelFormat": "no-channel",
+    "channelFormat": "index-grouped",
+    "configField": "selectorChannelFormatFlattened",
+    "channelName": "青空次元",
+    "channelNameMeans": "site-line-label-not-subtitle-group",
+    "checked": [
+      { "id": 4645, "episodeCount": 12, "filteredEpisodes": [1, 12] },
+      { "id": 4666, "episodeCount": 12, "filteredEpisodes": [1, 12] },
+      { "id": 4250, "episodeCount": 24, "filteredEpisodes": [1, 12] }
+    ],
+    "allEpisodeUrlsAndSortsUnchanged": true,
+    "filteredMatchesPerEpisode": 1,
+    "mediaAllianceLabelPassed": true,
+    "mediaIdChange": "only-channel-part-changes-from-null-to-site-label",
+    "videoRulesAndHeadersUnchanged": true,
+    "cacheBoundary": "old unexpired episode caches retain empty channel; manual query refresh clears current subject caches",
+    "updatedAppUiAcceptance": "pending-user-manual-validation"
   },
   "cef": {
     "mode": "isolated-installed-component-with-external-JBR",
