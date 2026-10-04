@@ -25,8 +25,22 @@
   ],
   "details": [
     { "id": 4666, "ssrEpisodeCount": 12, "allEpisodeSortsPassed": true },
-    { "id": 4250, "ssrEpisodeCount": 24, "allEpisodeSortsPassed": true }
+    { "id": 4250, "ssrEpisodeCount": 24, "allEpisodeSortsPassed": true },
+    { "id": 4645, "ssrEpisodeCount": 12, "allEpisodeSortsPassed": true }
   ],
+  "lifetimeSearchRegression": {
+    "keyword": "与你相恋到生命尽头",
+    "recordCount": 1,
+    "id": 4645,
+    "detailsUrl": "https://www.sorani.net/anime/mal/4645",
+    "installedEngineMatches": [
+      { "episode": 1, "count": 1, "url": "https://www.sorani.net/anime/mal/4645/episode/01" },
+      { "episode": 12, "count": 1, "url": "https://www.sorani.net/anime/mal/4645/episode/12" }
+    ],
+    "actualAppAcceptance": "pending-user-manual-validation",
+    "playbackTested": false,
+    "sessionSnapshotBoundary": "6.2.0 fixes source configuration at session creation; updating subscriptions does not recreate the same playback query"
+  },
   "cef": {
     "mode": "isolated-installed-component-with-external-JBR",
     "timeoutSeconds": 30,

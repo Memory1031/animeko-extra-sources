@@ -27,6 +27,10 @@
 | 学生会也有洞！ | 0 条 |
 | 学生会也有洞 | 0 条 |
 | 生徒会にも穴はある | 0 条 |
+| 与你相恋到生命尽头 | id 4645，12 集；实际引擎对第 1、12 集各返回唯一正确链接 |
+| 与你相恋 | 返回 4 个条目，包含 4645，也包含其他作品；不建议替代完整名称 |
+| 君が死ぬまで恋をしたい | 0 条 |
+| 与你相恋直到生命尽头 | 0 条 |
 
 API 存在 `alias` 字段。画完的别名包含“描绘直至生命尽头”“畫完這個再去死”“Kore Kaite Shine”等；没有逐个验证别名搜索。已测试中文名称可命中两部作品，但未在 Ani 的 Bangumi 查询流程中验收，不能保证全部 Bangumi 名称都能命中。
 
@@ -51,6 +55,13 @@ API 存在 `alias` 字段。画完的别名包含“描绘直至生命尽头”�
 | 无 Referer 的 m3u8 返回 403 | Header 防盗链 | 增加 `Referer: https://www.sorani.net/` 后 200、解码通过 |
 | 学生会的多个查询均无记录 | Sorani 搜索 API | 无可用条目，后续未测试；没有据此判定播放失败 |
 | 订阅有 1 个源且实例启用，但选源列表没有 Sorani | 6.2.0 的检索开关 / 空结果隐藏 | 恢复 `autoMatch.enabled=true`；6.2.0 没有独立手动浏览 UI |
+| 开关已更新但当前播放查询仍为 0 条，没有新的目标作品 API 请求 | 6.2.0 检索会话的数据源快照 | 完整退出 Ani 并重开，创建使用最新配置的新会话 |
+
+### 运行中更新订阅的边界
+
+6.2.0 的 [`MediaSourceManager.newSession`](https://github.com/open-ani/animeko/blob/v6.2.0/app/shared/app-data/src/commonMain/kotlin/domain/media/fetch/MediaSourceManager.kt) 明确固定使用当前 MediaFetcher 快照；源列表变更不重建相同播放查询。刷新订阅后，正在播放的旧会话仍可能使用之前关闭自动检索的 Sorani 实例。完整退出 Ani 并重开，再进入作品可确保创建新会话。没有为解决此问题修改配置数据库或清空缓存。
+
+“与你相恋到生命尽头”的新鲜 API 响应与 SSR HTML，已由本机安装包的实际 Selector 引擎验证：数字 id 拼接到 `/anime/mal/4645`，列出全部 12 集，EpisodeSort 1–12 正确，第 1、12 集过滤后分别只留下 `/episode/01`、`/episode/12`。这项验证没有操作正在运行的播放器，也没有验证该作品的 m3u8 或声音。
 
 配置中的 UA 已通过请求测试；普通 curl UA 加 Referer 同样成功。Cookie 为空，本次无需登录或其他额外 headers。没有发现 JSONPath、URL 拼接、SSR 列集、集号解析或签名捕获方面的 schema 阻断。
 
